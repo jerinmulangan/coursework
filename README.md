@@ -28,7 +28,6 @@ By the end, you can compile TL13 programs (including incorrect ones) and see app
 
 ### Repository Contents
 
-
 ```content
 .
 ├── tl13.l                # Flex lexer
@@ -45,13 +44,12 @@ By the end, you can compile TL13 programs (including incorrect ones) and see app
 └── README.md             # (This file)
 
 ```
+## Prerequisites
 
-### Prerequisites
-
-- Flex (≥ 2.6)
-- Bison (≥ 3.0)
-- GCC (or any C compiler that supports C99)
-- make (optional, for a simple build script)
+- **Flex** (≥ 2.6)
+- **Bison** (≥ 3.0)
+- **GCC** (or any C compiler that supports C99)
+- **make** (optional, for a simple build script)
 
 On Ubuntu/Debian, you can install dependencies with:
 
@@ -60,54 +58,49 @@ sudo apt update
 sudo apt install flex bison gcc make
 ```
 
-### Build Instructions
+## Build Instructions
 
-#### Generate Parser & Lexer (Scanner)
-
+ **Generate Parser & Lexer (Scanner)**
 ```bash
 bison -d tl13.y       # Produces tl13.tab.c and tl13.tab.h
 flex    tl13.l        # Produces lex.yy.c
 ```
 
-#### Compile All Sources
-
+**Compile All Sources**
 ```bash
 gcc -o tl13 tl13.tab.c lex.yy.c tl13_ast.c tl13_symbol_table.c tl13_codegen.c -lfl
 ```
 
-`-lfl` links the Flex runtime library.
-This produces the executable tl13 (the TL13 compiler itself).
+- `-lfl` links the Flex runtime library.
+- This produces the executable `tl13` (the TL13 compiler itself).
 
-#### Clean Generated Files (Optional)
-
+**Clean Generated Files (Optional)**
 ```bash
 rm -f tl13.tab.c tl13.tab.h lex.yy.c output.c tl13 tl13_output
 ```
 
-### Usage
+## Usage
 
-The project is made with accompanying input.txt file
+The project is made with accompanying input.txt file 
 
-#### Compile TL13 Program
-
+**Compile TL13 Program**
 ```bash
 ./tl13 < input.txt > output.c
 ```
 
-If there are semantic or runtime errors, they'll be printed to stderr and generation may abort or continue with warnings.
-On success, output.c will contain valid C code.
+- If there are **semantic or runtime errors**, they’ll be printed to **stderr** and generation may abort or continue with warnings.
+- On success, `output.c` will contain valid C code.
 
-#### Compile and Run Generated C
-
+**Compile and Run Generated C**
 ```bash
 gcc -o tl13_output output.c
 ./tl13_output
 ```
 
-If your TL13 program uses readInt, it will prompt for integers.
-Non-integer input will cause output.c to print an error and exit.
+- If your TL13 program uses `readInt`, it will prompt for integers.
+- Non-integer input will cause `output.c` to print an error and exit.
 
-#### Other Test Case Compilations
+**Other Test Case Compilations**
 
 ```bash
 ./tl13 < input_badif.txt > output_badif.c
@@ -130,61 +123,59 @@ gcc -o tl13_output_writeint output_writeint.c
 ./tl13_output_writeint.c
 ```
 
-### Error / Warning Categories
+## Error / Warning Categories
 
 The compiler catches at least three distinct errors:
 
-#### 1. Undeclared Variable Warning
+**1. Undeclared Variable Warning**
+    - Example: `X := 5;` when `X` was never declared.
+    - **Behavior**:
+        - Emits a warning:
 
-**Example**: `X := 5;` when X was never declared.
-
-**Behavior**: Emits a warning:
-```
+```c
 warning: undeclared variable X; defaulting to int.
 ```
 
-#### 2. Type Mismatch
+**2. Type Mismatch**
+- Assignment mismatch: assigning an `int` to a `bool` or vice-versa.
+    - Example:
 
-**Assignment mismatch**: assigning an int to a bool or vice-versa.
-
-**Example**:
-```
+```tl
 var F as bool ;
 F := 42 ;
 ```
 
-```
+```c
 type mismatch: cannot assign int to bool F.
 ```
 
-**Using writeInt on a non-int expression.**
-**Using a non-bool in an if or while guard.**
+- Using `writeInt` on a non-`int` expression.
+- Using a non-`bool` in an `if` or `while` guard.
 
-#### 3. Uninitialized Variable Warning
+**3. Uninitialized Variable Warning**
+- Reading a variable before it has been assigned.
+    - Example:
 
-**Reading a variable before it has been assigned.**
-
-**Example**:
-```
+```tl
 var A as int ;
 var B as int ;
 B := A ;
 ```
 
-```
+```c
 warning: variable A used before initialization.
 ```
 
-#### 4. Literal Out of Range
+**4. Literal Out of Range**
+- `<lexer>` checks any numeric literal > 2,147,483,647 and aborts:
 
-`<lexer>` checks any numeric literal > 2,147,483,647 and aborts:
-```
+```c
 Error: integer literal out of range (2147483648) on line 7
 ```
 
-#### 5. Non-Integer Input at readInt
+**5. Non-Integer Input at `readInt`**
+- The generated C wraps each `scanf("%d",…)` with:
 
-The generated C wraps each `scanf("%d",…)` with:
 ```c
 if (scanf("%d",&X) != 1) {
   fprintf(stderr, "type mismatch error: non-integer input for X.\n");
@@ -192,53 +183,60 @@ if (scanf("%d",&X) != 1) {
 }
 ```
 
-Typing "foo" or "d" will print an error and exit.
+- Typing `"foo"` or `"d"` will print an error and exit.
 
-### How It Works
+## How It Works
 
-#### Lex/Flex (tl13.l)
+1. **Lex/Flex (`tl13.l`)**
+    
+    - Breaks input into tokens: keywords (`program`, `if`, etc.), identifiers (all-caps), integer literals, booleans, operators, and punctuation.
+    - Checks numeric range for any literal > 2,147,483,647.
+        
+2. **Bison (`tl13.y`)**
+    
+    - Defines the TL13 grammar (program → declarations + statements, etc.).
+    - Builds an AST by calling `create_node(...)` on each matched rule.
+    - After parsing completes, `main()` calls `generate_code(root)`.
+        
+3. **AST & Symbol Table**
+    
+    - `tl13_ast.h`/`.c`: Defines `ASTNode`, helper to build and link nodes.
+    - `tl13_symbol_table.h`/`.c`: Simple linked-list table of
+    
+4. **Code Generation + Semantic Checks (`tl13_codegen.c`)**
+    
+    - Recursively traverses the AST.
+    - **Declarations**: Emits `int var = 0;` and inserts into the symbol table.
+    
+    - **Assignments**:
+        
+        - If the LHS is undeclared: warning + `int var=0;` + insert as `int`.
+        - Calls `infer_type(...)` on the RHS to ensure type compatibility.
+        - If reading from `readInt`, prints a runtime `scanf` with a check that aborts on non-integer.
+            
+    - **Expressions / Operators**:
+        
+        - `infer_type(...)` ensures arithmetic only on `int`, comparisons only on `int`, and yields `bool` for comparisons.
+        - Emits the corresponding infix operator in C.
+            
+    - **Control Flow**:
+        
+        - `if` and `while` guard expressions must be `bool`; otherwise error.
+        - Emits equivalent C `if(...) { ... }` and `while(...) { ... }`.
+            
+    - **writeInt**:
+        
+        - Checks the argument is `int`; otherwise aborts.
+        - Emits `printf("%d\n", expr);`.
+            
+5. **Generated C**
+    
+    - Always includes `<stdio.h>` and `<stdlib.h>`.
+    - Declares every TL13 `var` (and any implicit ones) as `int var = 0;`.
+    - Performs runtime error checks before each `scanf`.
+    - Mirrors the original TL13 control flow and expressions.
 
-Breaks input into tokens: keywords (program, if, etc.), identifiers (all-caps), integer literals, booleans, operators, and punctuation.
-Checks numeric range for any literal > 2,147,483,647.
-
-#### Bison (tl13.y)
-
-Defines the TL13 grammar (program → declarations + statements, etc.).
-Builds an AST by calling create_node(...) on each matched rule.
-After parsing completes, main() calls generate_code(root).
-
-#### AST & Symbol Table
-
-- `tl13_ast.h/.c`: Defines ASTNode, helper to build and link nodes.
-- `tl13_symbol_table.h/.c`: Simple linked-list table.
-
-#### Code Generation + Semantic Checks (tl13_codegen.c)
-
-Recursively traverses the AST.
-
-- **Declarations**: Emits `int var = 0;` and inserts into the symbol table.
-- **Assignments**:
-  - If the LHS is undeclared: warning + `int var=0;` + insert as int.
-  - Calls `infer_type(...)` on the RHS to ensure type compatibility.
-  - If reading from readInt, prints a runtime scanf with a check that aborts on non-integer.
-- **Expressions / Operators**:
-  - `infer_type(...)` ensures arithmetic only on int, comparisons only on int, and yields bool for comparisons.
-  - Emits the corresponding infix operator in C.
-- **Control Flow**:
-  - if and while guard expressions must be bool; otherwise error.
-  - Emits equivalent C `if(...) { ... }` and `while(...) { ... }`.
-- **writeInt**:
-  - Checks the argument is int; otherwise aborts.
-  - Emits `printf("%d\n", expr);`.
-
-#### Generated C
-
-Always includes `<stdio.h>` and `<stdlib.h>`.
-Declares every TL13 var (and any implicit ones) as `int var = 0;`.
-Performs runtime error checks before each scanf.
-Mirrors the original TL13 control flow and expressions.
-
-### AST Node Symbol Table Entries
+**AST Node Symbol Table Entries**
 
 ```c
 struct SymbolEntry {
@@ -248,10 +246,6 @@ struct SymbolEntry {
   SymbolEntry *next;
 };
 ```
-
-### License
-
-MIT License
 
 ---
 
