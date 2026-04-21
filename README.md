@@ -26,7 +26,7 @@ This project implements a simple compiler for the TL13 language, using Flex (lex
 
 By the end, you can compile TL13 programs (including incorrect ones) and see appropriate warnings/errors, or generate a C program and run it.
 
-### Repository Contents
+#### Repository Contents
 
 ```content
 .
@@ -44,7 +44,7 @@ By the end, you can compile TL13 programs (including incorrect ones) and see app
 └── README.md             # (This file)
 
 ```
-## Prerequisites
+### Prerequisites
 
 - **Flex** (≥ 2.6)
 - **Bison** (≥ 3.0)
@@ -58,7 +58,7 @@ sudo apt update
 sudo apt install flex bison gcc make
 ```
 
-## Build Instructions
+### Build Instructions
 
  **Generate Parser & Lexer (Scanner)**
 ```bash
@@ -79,7 +79,7 @@ gcc -o tl13 tl13.tab.c lex.yy.c tl13_ast.c tl13_symbol_table.c tl13_codegen.c -l
 rm -f tl13.tab.c tl13.tab.h lex.yy.c output.c tl13 tl13_output
 ```
 
-## Usage
+### Usage
 
 The project is made with accompanying input.txt file 
 
@@ -123,7 +123,7 @@ gcc -o tl13_output_writeint output_writeint.c
 ./tl13_output_writeint.c
 ```
 
-## Error / Warning Categories
+### Error / Warning Categories
 
 The compiler catches at least three distinct errors:
 
@@ -185,7 +185,7 @@ if (scanf("%d",&X) != 1) {
 
 - Typing `"foo"` or `"d"` will print an error and exit.
 
-## How It Works
+### How It Works
 
 1. **Lex/Flex (`tl13.l`)**
     
@@ -338,7 +338,7 @@ The script will:
 | Poly | C = 10, degree = 2 | 0.958 ± 0.003 | 0.960 |
 | Linear | C = 10 | 0.906 ± 0.002 | 0.9085 |
 
-### 5. Reproducing / extending
+### ==5. Reproducing / extending==
 
 - **Change train / test size** – `load_data(train_size=…, test_size=…)` in svm.py.
 - **Add kernels / parameters** – edit param_grid inside run_grid_search.
