@@ -8,7 +8,7 @@ This document contains the complete documentation for all academic projects, con
 - [2. MNIST SVM Hyperparameter Search & Benchmark On Multiple Kernels](#2-mnist-svm-hyperparameter-search-and-benchmark-on-multiple-kernels)
 - [3. Enron Spam Classification](#3-enron-spam-classification)
 - [4. Tree-Based Classifiers & Ensemble Methods](#4-tree-based-classifiers-and-ensemble-methods)
-- [5. MNIST & CIFAR-10: MLP and CNN Benchmark](#5-mnist-and-cifar-10-mlp-and-cnn-benchmark)
+- [5. MNIST & CIFAR-10: MLP and CNN Benchmark](#5-mnist-and-cifar10-mlp-and-cnn-benchmark)
 - [6. Dijkstra Pathfinding Visualizer](#6-dijkstra-pathfinding-visualizer)
 - [7. XYZCOMPANY RDBMS & Query Java Console](#7-xyzcompany-rdbms-and-query-java-console)
 - [8. FinFinity](#8-finfinity)
@@ -500,7 +500,7 @@ MIT
 
 ---
 
-## <mark>4. Tree Based Classifiers & Ensemble Methods</mark>
+## <mark>4. Tree Based Classifiers and Ensemble Methods</mark>
 
 This project is for CS 4375 Machine Learning Course
 
@@ -576,7 +576,7 @@ Both scripts fix `random_state=0` where applicable to ensure identical results a
 
 ---
 
-## <mark>5. MNIST and CIFAR‑10: MLP and CNN Benchmark</mark>
+## <mark>5. MNIST and CIFAR10: MLP and CNN Benchmark</mark>
 
 This project is for CS 4375 Machine Learning Course
 
