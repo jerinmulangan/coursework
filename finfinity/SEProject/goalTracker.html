@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Tracker</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Add your custom styles here */
+        .navbar-custom {
+      background-color: #D9D9D9;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    
+    .navbar-custom a {
+      color: #333;
+      font-weight: bold;
+      font-size: 24px; /* Updated font size */
+      text-decoration: none; /* Remove underline */
+      transition: color 0.3s ease;
+    }
+
+    .navbar-custom a:hover {
+      color: #000;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    body {
+      background: linear-gradient(to right, rgba(6, 6, 225, 0.457) 50%, rgb(154, 159, 178) 80%);
+      padding-top: 86px; /* Padding to push the content below the navbar */
+    }
+
+    table {
+      background-color: white;
+    }
+
+    .add-btn {
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 28px;
+      transition: background 0.3s, transform 0.2s;
+      width: 300px;
+    }
+    
+    .add-btn:hover {
+      background-image: linear-gradient(45deg, rgb(154, 159, 178), rgba(6, 6, 225, 0.457));
+      transform: scale(1.05);
+      color: #fff;
+      text-decoration: none;
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light navbar-custom">
+    <div class="container-fluid">
+      <img src="Logo.png" alt="Logo" style="width: 86px; height: 86px; margin-top: 5px;">
+      <a href="indexDashboard.html">Home</a>
+    </div>
+  </nav>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <h1 style="text-align: center;">My Goals</h1>
+    <br>
+    <div class="button-container">
+      <button class="add-btn" onclick="window.location.href='addGoal.html';">Add New Goal</button>
+    </div>
+    <br>
+    <table class="table table-hover table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Target Amount</th>
+          <th>Deadline</th>
+          <th>Priority</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="goals-table"></tbody>
+    </table>
+  </div>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const response = await fetch('http://localhost:4024/financial-goals');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const goals = await response.json();
+
+        const goalsTable = document.getElementById('goals-table');
+        goalsTable.innerHTML = ''; // Clear the table
+
+        goals.forEach(goal => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+            <tr id="goal-${goal.id}">
+    <td id="title-${goal.id}">${goal.title}</td>
+    <td id="description-${goal.id}">${goal.description}</td>
+    <td id="targetAmount-${goal.id}">${goal.targetAmount}</td>
+    <td id="deadline-${goal.id}">${new Date(goal.deadline).toLocaleDateString()}</td>
+    <td id="priority-${goal.id}">${goal.priority}</td>
+    <td>
+        <button class="btn btn-danger" onclick="deleteGoal(${goal.id})">Delete</button>
+        <button class="btn btn-primary" onclick="editGoal(${goal.id})">Edit</button>
+    </td>
+</tr>
+
+            `;
+            goalsTable.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to fetch goals: ' + error.message);
+    }
+});
+
+
+
+// Delete goal
+function deleteGoal(id) {
+    if (confirm('Are you sure you want to delete this goal?')) {
+        fetch(`http://localhost:4024/financial-goals/${id}`, { method: 'DELETE' })
+        .then(response => {
+            if (response.ok) {
+                alert('Goal deleted successfully');
+                document.getElementById(`goal-${id}`).remove();
+            } 
+        })
+    }
+}
+
+// Edit goal
+function editGoal(id) {
+    const title = prompt("Enter new title:", document.getElementById(`title-${id}`).textContent);
+    const description = prompt("Enter new description:", document.getElementById(`description-${id}`).textContent);
+    const targetAmount = prompt("Enter new target amount:", document.getElementById(`targetAmount-${id}`).textContent);
+    let deadline = prompt("Enter new deadline (YYYY-MM-DD):", document.getElementById(`deadline-${id}`).textContent);
+    const priority = prompt("Enter new priority (High, Medium, Low):", document.getElementById(`priority-${id}`).textContent);
+
+    // Convert deadline to ISO format (YYYY-MM-DD) if it is not already
+    deadline = new Date(deadline).toISOString().split('T')[0];
+
+    if (title && description && targetAmount && deadline && priority) {
+        fetch(`http://localhost:4024/financial-goals/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, description, targetAmount, deadline, priority })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Goal updated successfully');
+                window.location.reload();
+            } else {
+                throw new Error('Failed to update goal');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating goal:', error);
+            alert('Failed to update goal: ' + error);
+        });
+    } else {
+        alert('All fields are required.');
+    }
+}
+
+
+
+
+    </script>
+</body>
+</html>

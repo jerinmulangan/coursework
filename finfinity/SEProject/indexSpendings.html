@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Spendings App</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <style>
+
+.navbar-custom {
+            background-color: #D9D9D9;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-custom a {
+            color: #333;
+            font-weight: bold;
+            font-size: 24px; /* Updated font size */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s ease;
+        }
+
+        .navbar-custom a:hover {
+            color: #000;
+        }
+
+        .button-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+
+        body {
+            background: linear-gradient(to right, rgba(6, 6, 225, 0.457) 50%, rgb(154, 159, 178) 80%);
+            padding-top: 86px; /* Padding to push the content below the navbar */
+        }
+        table{
+            background-color: white;
+        }
+
+        .add-btn {
+        background: green ;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 28px;
+        transition: background 0.3s, transform 0.2s;
+        width: 300px;
+    }
+    
+    .add-btn:hover {
+        background-image: linear-gradient(45deg, rgb(154, 159, 178), rgba(6, 6, 225, 0.457));
+        transform: scale(1.05);
+        color: #fff;
+        text-decoration: none;
+    }
+
+
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-light navbar-custom">
+        <div class="container-fluid">
+            <img src="Logo.png" alt="Logo" style="width: 86px; height: 86px; margin-top: 5px;">
+            <a href="indexDashboard.html">Home</a>
+        </div>
+    </nav>
+<br>
+    <br>
+    <br>
+  <div class="container">
+    <h1 style="text-align: center;">My Spendings</h1>
+    <br>
+    <div class="button-container">
+        <button class="add-btn" onclick="window.location.href='inputSpendings.html';">Add New Spending</button>
+    </div>
+    <br>
+    <table class="table table-hover table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="spendings-table"></tbody>
+    </table>
+  </div>
+
+
+</body>
+
+<script>
+    window.onload = function() {
+        fetch('http://localhost:4024/spendings')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('spendings-table');
+            data.forEach(spend => {
+                const tr = document.createElement('tr');
+                tr.id = `spend-${spend.id}`;
+                tr.innerHTML = `
+                    <td id="amount-${spend.id}">${spend.amount}</td>
+                    <td id="category-${spend.id}">${spend.category}</td>
+                    <td id="date-${spend.id}">${new Date(spend.spendingDate).toLocaleDateString()}</td>
+                    <td>
+                        <button  class="btn btn-danger btn-sm" onclick="deleteSpending(${spend.id})">Delete</button>
+                        <button  class="btn btn-primary btn-sm" onclick="editSpending(${spend.id})">Edit</button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching spendings:', error);
+            alert('Failed to fetch spendings: ' + error.message);
+        });
+    };
+    
+    function deleteSpending(id) {
+        fetch(`http://localhost:4024/delete-spending/${id}`, { method: 'DELETE' })
+        .then(response => {
+            if (response.ok) {
+                alert('Spending deleted successfully');
+                document.getElementById(`spend-${id}`).remove(); 
+            } else {
+                throw new Error('Failed to delete spending');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting spending:', error);
+            alert('Error deleting spending: ' + error.message);
+        });
+    }
+    
+    function editSpending(id) {
+    const newAmount = prompt("Enter new amount:", document.getElementById(`amount-${id}`).textContent);
+    const newCategory = prompt("Enter new category:", document.getElementById(`category-${id}`).textContent);
+    const newDate = prompt("Enter new date (YYYY-MM-DD):", document.getElementById(`date-${id}`).textContent);
+
+    if (newAmount && newCategory && newDate) {
+        fetch(`http://localhost:4024/update-spending/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ amount: newAmount, category: newCategory, spendingDate: newDate })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Spending updated successfully');
+                document.getElementById(`amount-${id}`).textContent = newAmount;
+                document.getElementById(`category-${id}`).textContent = newCategory;
+                document.getElementById(`date-${id}`).textContent = new Date(newDate).toLocaleDateString();
+            } else {
+                throw new Error('Failed to update spending');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating spending:', error);
+            alert('Failed to update spending: ' + error.message);
+        });
+    } else {
+        alert('All fields are required.');
+    }
+}
+
+
+    </script>
+    

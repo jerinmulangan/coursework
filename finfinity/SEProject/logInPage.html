@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="stylesLogin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="hexagon logo-hexagon">
+            <a href="index.html">
+                <img src="Logo.png" alt="Logo">
+            </a>
+        </div>
+        <div class="login-panel">
+            <h2 class="login-title">Login</h2>
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <a href="resetPasswordPage.html" class="forgot-password">Forgot password?</a>
+                <button type="submit">LOGIN</button>
+                <button type="button" onclick="location.href='signUpPage.html';" class="sign-up-button">Sign Up</button>
+            </form>
+            <div class="divider">
+                <span>Or login with</span>
+            </div>
+            <div class="social-login-icons">
+                <!-- Twitter -->
+                <button onclick="simulateSocialLogin('Twitter')">
+                    <i class="fab fa-twitter"></i>
+                </button>
+                
+                <!-- Facebook -->
+                <button onclick="simulateSocialLogin('Facebook')">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                
+                <!-- Google -->
+                <button onclick="simulateSocialLogin('Google')">
+                    <i class="fab fa-google"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    async function handleLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('http://localhost:4024/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (response.ok) {
+                alert('Logged in successfully!');
+                window.location.href = 'indexDashboard.html';
+            } else if (response.status === 401) {
+                alert('Incorrect password');
+            } else if (response.status === 404) {
+                alert('Email account does not exist');
+            } else {
+                throw new Error('Login failed');
+            }
+        } catch (error) {
+            alert('An error occurred during login');
+            console.error(error);
+        }
+    }
+
+
+    document.querySelector('.login-form').addEventListener('submit', handleLogin);
+</script>
+</html>

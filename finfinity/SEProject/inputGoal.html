@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Goal Tracker</title>
+    <style>
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold; 
+            font-size: 30px;
+        }
+
+        .navbar a:hover {
+            color: #000; 
+        }
+
+        
+        .form-container {
+            margin: 0 auto;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px; 
+        }
+
+        
+        .form-label {
+            font-weight: bold;
+            font-size: 18px;
+            color: #ffffff; 
+        }
+
+        
+        .form-control {
+            margin-bottom: 15px; 
+            border: none;
+            border-radius: 0; 
+            border-bottom: 1px solid #ccc; 
+            background-color: transparent; 
+            box-shadow: none; 
+        }
+
+        
+        .form-control:focus {
+            box-shadow: none;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: black;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: blue;
+        }
+        h1, h3 {
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px #000000;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+    <body style="background: linear-gradient(to right, rgba(6, 6, 225, 0.457) 50%, rgb(154, 159, 178) 80%);;">
+        <nav style="background-color: #D9D9D9;" class="navbar navbar-light">
+            <img style="width: 86px; height: 86px; overflow: hidden; margin-top: 5px; margin-left: 10px;" src="Logo.png">
+            <a href="index.html" style="margin-right: 25px;">Home</a>
+        </nav>
+        <br>
+        <br>
+
+        <h1>Add New Goal</h1>
+    <h3>Add a new goal to help track your spending habits and save for what matters</h3>
+    <br>
+        
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="goalType">Input Goal Type</label>
+                <input type="text" class="form-control" id="goalType" placeholder="Enter goal type">
+            </div>
+            <div class="form-group">
+                <label for="timeframe">Select Timeframe</label>
+                <select class="form-control" id="timeframe">
+                    <option>1 month</option>
+                    <option>3 months</option>
+                    <option>6 months</option>
+                    <option>1 year</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="targetAmount">Input Target Amount</label>
+                <input type="number" class="form-control" id="targetAmount" placeholder="$">
+            </div>
+            <div class="form-group">
+                <label for="goalName">Name Goal</label>
+                <input type="text" class="form-control" id="goalName" placeholder="Enter goal name">
+            </div>
+            <button type="submit" class="submit-btn">Save Changes</button>
+        </form>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

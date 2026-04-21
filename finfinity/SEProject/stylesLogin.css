@@ -1,0 +1,163 @@
+/* Main body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, rgba(6, 6, 225, 0.457) 50%, rgb(154, 159, 178) 80%);
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Login container with hexagon logo and login panel */
+.login-container {
+    text-align: center;
+    max-width: 300px;
+}
+
+/* Hexagon logo styles */
+.hexagon.logo-hexagon {
+    /* Replace with your hexagon size */
+    width: 120px;
+    height: 104px;
+    background-color: #112240;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    margin-bottom: 20px;
+}
+
+.hexagon.logo-hexagon img {
+    max-width: 80%; /* Adjust as needed */
+    height: auto;
+}
+
+.hexagon.logo-hexagon a img {
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for transform and opacity */
+}
+
+.hexagon.logo-hexagon a:hover img {
+    transform: scale(1.1); /* Slightly increase size */
+    opacity: 0.8; /* Slightly decrease opacity */
+}
+
+/* Styles for the login form panel */
+.login-panel {
+    background-color: #2c3e50;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: -50px; /* Adjust based on the size of the hexagon */
+}
+
+.login-title {
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.login-form input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #34495e;
+    color: white;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+}
+
+.forgot-password {
+    display: block;
+    color: #95A5A6;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+/* Divider styles */
+.divider {
+    margin: 20px 0;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    border-bottom: 1px solid #95A5A6;
+    width: 40%;
+    height: 1px;
+}
+
+.divider::before {
+    right: 50%;
+    margin-right: 15px;
+}
+
+.divider::after {
+    left: 50%;
+    margin-left: 15px;
+}
+
+/* Social icons styles */
+.social-login-icons {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Gap between icons */
+}
+
+.social-login-icons i {
+    cursor: pointer;
+    color: #95A5A6;
+}
+
+.social-login-icons i:hover {
+    color: #3498db;
+}
+
+
+/* Mock reCAPTCHA Badge styles */
+.recaptcha-badge {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+    width: 40px; /* Adjust if necessary */
+    height: 40px; /* Adjust if necessary */
+    background: #ccc; /* Temporary background for visibility */
+    transition: width 0.3s ease, padding 0.3s ease;
+    overflow: hidden;
+    border-radius: 3px; /* Optional: for rounded corners */
+}
+
+.recaptcha-badge:hover {
+    width: 150px; /* Width after expansion, adjust as needed */
+    padding-left: 40px; /* Padding to reveal the link */
+}
+
+.recaptcha-link {
+    display: none;
+    white-space: nowrap;
+}
+
+.recaptcha-badge:hover .recaptcha-link {
+    display: block;
+    color: #000; /* Text color */
+    text-decoration: none; /* No underline */
+    font-size: 12px; /* Adjust as needed */
+}

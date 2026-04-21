@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="stylesDashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body class="custom-body">
+    <nav class="navigation-bar px-3 bg-light">
+        <img src="../logo.png" alt="logo" class="logo-link">
+        <a class="profile-link">
+            <i class="fas fa-user-circle profile-icon"></i>
+        </a> 
+    </nav>
+    <div class="hexagon-grid">
+        <div class="hexagon-item"><div class="hexagon" id="goalTracker-hexagon"><span>Goal Tracker</span></div></div>
+        <div class="hexagon-item"><div class="hexagon" id="budget-hexagon"><span>Budget</span></div></div>
+        <div class="hexagon-item"><div class="hexagon" id="spending-hexagon"><span>Spendings</span></div></div>
+        <div class="hexagon-item"><div class="hexagon" id="goals-hexagon"><span>Change Password</span></div></div>
+        <div class="hexagon-item"><div class="hexagon" id="chatbot-hexagon"><span>AI Chatbot</span></div></div>
+        <div class="hexagon-item"><div class="hexagon" id="logout-hexagon"><span>Logout</span></div></div>
+    </div>
+
+    <div class="recaptcha-badge">
+        <img src="download.png" alt="reCAPTCHA Logo" class="recaptcha-logo"/>
+        <a href="https://www.google.com/recaptcha/about/" target="_blank" class="recaptcha-link">
+            Privacy - Terms
+        </a>
+    </div>
+    
+    <script src="scriptDashboard.js"></script>
+</body>
+</html>
