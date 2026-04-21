@@ -2,7 +2,7 @@
 
 This document contains the complete documentation for all academic projects, consolidated from their respective original README files.
 
-## 1. <mark>TL13 Compiler</mark>
+## <mark>1. TL13 Compiler</mark>
 
 This project is for CS 4386 Compiler Design Course
 
@@ -249,7 +249,7 @@ struct SymbolEntry {
 
 ---
 
-## 2. MNIST SVM Hyper‑parameter Search & Benchmark On Multiple Kernels
+## <mark>2. MNIST SVM Hyper‑parameter Search & Benchmark On Multiple Kernels</mark>
 
 This project is for CS 4375 Machine Learning Course
 
@@ -345,15 +345,9 @@ The script will:
 - **Verbose fold‑level prints** – see svm_kernel.py, which manually loops through parameter grids and folds.
 - **Use the trained model**
 
-### License
-
-MIT
-
-scikit‑learn documentation – SVC, GridSearchCV.
-
 ---
 
-## 3. Enron Spam Classification Project
+## <mark>3. Enron Spam Classification Project</mark>
 
 This project is for CS 4375 Machine Learning Course
 
@@ -493,7 +487,7 @@ MIT
 
 ---
 
-## 4. Tree‑Based Classifiers & Ensemble Methods
+## <mark>4. Tree‑Based Classifiers & Ensemble Methods</mark>
 
 This project is for CS 4375 Machine Learning Course
 
@@ -567,13 +561,9 @@ MNIST - Gradient Boosting Classifier: Accuracy=0.9973
 
 Both scripts fix `random_state=0` where applicable to ensure identical results across runs.
 
-### License
-
-MIT
-
 ---
 
-## 5. MNIST & CIFAR‑10: MLP and CNN Benchmark
+## <mark>5. MNIST & CIFAR‑10: MLP and CNN Benchmark</mark>
 
 This project is for CS 4375 Machine Learning Course
 
@@ -661,13 +651,9 @@ All raw logs are saved to results.txt for inspection.
 - PyTorch ≥ 2.3 with CUDA 11+ (optional but recommended)
 - torchvision, scikit‑learn, pandas, numpy, matplotlib, seaborn
 
-### License
-
-MIT
-
 ---
 
-## 6. Dijkstra Pathfinding Visualizer
+## <mark>6. Dijkstra Pathfinding Visualizer</mark>
 
 Interactive randomly generated grid‑based visualizer written in C++ using the SFML 3.0.0. It demonstrates real‑time Dijkstra routing across a 150 × 150 grid (22 500 nodes); it solves the shortest path in ≈ 20 ms, shows start/goal, visited cells, and the final route in real‑time, while logging performance metrics to CSV, and overlays live stats on screen. Optionally a Python program reads the data stored in the CSV and using Pandas and MatPlot libraries displays the results of all runs over time taken.
 
@@ -745,13 +731,9 @@ After running, the script:
 - Frame‑by‑frame animation slider
 - Export PNG of the grid & path
 
-### License
-
-MIT
-
 ---
 
-## 7. XYZCOMPANY RDBMS & Query Java Console
+## <mark>7. XYZCOMPANY RDBMS & Query Java Console</mark>
 
 This project is for CS 4347 Database Systems Course
 
@@ -958,7 +940,7 @@ $stmt->execute();
 
 ---
 
-## 8. FinFinity
+## <mark>8. FinFinity</mark>
 
 This Project is for CS 3354 Software Engineering
 
@@ -1015,7 +997,7 @@ FinFinity's design includes:
 
 For detailed descriptions of use cases, architecture diagrams, and a full glossary, refer to the extended documentation.
 
-## 9. Search Algorithms
+## <mark>9. Search Algorithms</mark>
 These projects are for CS 4365 Artificial Intelligence
 
 A comprehensive collection of classic and advanced search, game-tree,
@@ -1303,7 +1285,7 @@ Record:        Win
 
 ------------------------------------------------------------------------
 
-## 10. O3F-Lite: Smart Robot Task Learning
+## <mark>10. O3F-Lite: Smart Robot Task Learning</mark>
 
 This project was delivered to Prof. Tymoschuck for CSCE 4430 Programming Languages
 
@@ -1673,3 +1655,9 @@ Note: High variance early in training is expected due to random scene generation
 # License
 
 MIT License
+The Regents of the University of California 
+(Regents). UC Berkeley
+zlib License
+BSD License
+BSD-style License
+GPL v2 with FOSS exception
