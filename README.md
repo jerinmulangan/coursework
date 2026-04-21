@@ -2,7 +2,7 @@
 
 This document contains the complete documentation for all academic projects, consolidated from their respective original README files.
 
-## 1. TL13 Compiler
+## 1. <mark>TL13 Compiler</mark>
 
 This project is for CS 4386 Compiler Design Course
 
@@ -338,7 +338,7 @@ The script will:
 | Poly | C = 10, degree = 2 | 0.958 ± 0.003 | 0.960 |
 | Linear | C = 10 | 0.906 ± 0.002 | 0.9085 |
 
-### ==5. Reproducing / extending==
+### 5. Reproducing / extending
 
 - **Change train / test size** – `load_data(train_size=…, test_size=…)` in svm.py.
 - **Add kernels / parameters** – edit param_grid inside run_grid_search.
