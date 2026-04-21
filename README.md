@@ -5,12 +5,12 @@ This document contains the complete documentation for all academic projects, con
 ## Table of Contents
 
 - [1. TL13 Compiler](#1-tl13-compiler)
-- [2. MNIST SVM Hyper-parameter Search & Benchmark On Multiple Kernels](#2-mnist-svm-hyper-parameter-search-benchmark-on-multiple-kernels)
+- [2. MNIST SVM Hyperparameter Search & Benchmark On Multiple Kernels](#2-mnist-svm-hyperparameter-search-and-benchmark-on-multiple-kernels)
 - [3. Enron Spam Classification](#3-enron-spam-classification)
-- [4. Tree-Based Classifiers & Ensemble Methods](#4-tree-based-classifiers-ensemble-methods)
-- [5. MNIST & CIFAR-10: MLP and CNN Benchmark](#5-mnist-cifar-10-mlp-and-cnn-benchmark)
+- [4. Tree-Based Classifiers & Ensemble Methods](#4-tree-based-classifiers-and-ensemble-methods)
+- [5. MNIST & CIFAR-10: MLP and CNN Benchmark](#5-mnist-and-cifar-10-mlp-and-cnn-benchmark)
 - [6. Dijkstra Pathfinding Visualizer](#6-dijkstra-pathfinding-visualizer)
-- [7. XYZCOMPANY RDBMS & Query Java Console](#7-xyzcompany-rdbms-query-java-console)
+- [7. XYZCOMPANY RDBMS & Query Java Console](#7-xyzcompany-rdbms-and-query-java-console)
 - [8. FinFinity](#8-finfinity)
 - [9. Search Algorithms](#9-search-algorithms)
 - [10. O3F-Lite: Smart Robot Task Learning](#10-o3f-lite-smart-robot-task-learning)
@@ -262,7 +262,7 @@ struct SymbolEntry {
 
 ---
 
-## <mark>2. MNIST SVM Hyper‑parameter Search & Benchmark On Multiple Kernels</mark>
+## <mark>2. MNIST SVM Hyperparameter Search and Benchmark On Multiple Kernels</mark>
 
 This project is for CS 4375 Machine Learning Course
 
@@ -360,7 +360,7 @@ The script will:
 
 ---
 
-## <mark>3. Enron Spam Classification Project</mark>
+## <mark>3. Enron Spam Classification</mark>
 
 This project is for CS 4375 Machine Learning Course
 
@@ -500,7 +500,7 @@ MIT
 
 ---
 
-## <mark>4. Tree‑Based Classifiers & Ensemble Methods</mark>
+## <mark>4. Tree Based Classifiers & Ensemble Methods</mark>
 
 This project is for CS 4375 Machine Learning Course
 
@@ -576,7 +576,7 @@ Both scripts fix `random_state=0` where applicable to ensure identical results a
 
 ---
 
-## <mark>5. MNIST & CIFAR‑10: MLP and CNN Benchmark</mark>
+## <mark>5. MNIST and CIFAR‑10: MLP and CNN Benchmark</mark>
 
 This project is for CS 4375 Machine Learning Course
 
@@ -746,7 +746,7 @@ After running, the script:
 
 ---
 
-## <mark>7. XYZCOMPANY RDBMS & Query Java Console</mark>
+## <mark>7. XYZCOMPANY RDBMS and Query Java Console</mark>
 
 This project is for CS 4347 Database Systems Course
 
