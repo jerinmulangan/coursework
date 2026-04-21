@@ -5,9 +5,9 @@ This document contains the complete documentation for all academic projects, con
 ## Table of Contents
 
 - [1. TL13 Compiler](#1-tl13-compiler)
-- [2. MNIST SVM Hyper-parameter Search & Benchmark On Multiple Kernels](#2-mnist-svm-hyper-parameter-search-and-benchmark-on-multiple-kernels)
+- [2. MNIST SVM Hyper-parameter Search & Benchmark On Multiple Kernels](#2-mnist-svm-hyper-parameter-search-benchmark-on-multiple-kernels)
 - [3. Enron Spam Classification](#3-enron-spam-classification)
-- [4. Tree-Based Classifiers & Ensemble Methods](#4-tree-based-classifiers-and-ensemble-methods)
+- [4. Tree-Based Classifiers & Ensemble Methods](#4-tree-based-classifiers-ensemble-methods)
 - [5. MNIST & CIFAR-10: MLP and CNN Benchmark](#5-mnist-cifar-10-mlp-and-cnn-benchmark)
 - [6. Dijkstra Pathfinding Visualizer](#6-dijkstra-pathfinding-visualizer)
 - [7. XYZCOMPANY RDBMS & Query Java Console](#7-xyzcompany-rdbms-query-java-console)
